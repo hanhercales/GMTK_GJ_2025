@@ -10,7 +10,7 @@ public class CameraRotaion : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(2))
         {
             float mouseX = Input.GetAxis("Mouse X");
             currenYaw += mouseX * rotationSpeed;
