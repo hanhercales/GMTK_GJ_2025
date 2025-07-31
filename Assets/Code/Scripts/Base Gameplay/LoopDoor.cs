@@ -2,32 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class LoopDoor : MonoBehaviour
 {
     public bool isLooping = true;
-    public bool loopCode = false;
+    public string endLoopString = "";
+    
+    [SerializeField] private string currentLoopString = "";
+    [SerializeField] private GameObject doorC;
+    [SerializeField] private Transform playerPosistion;
+    [SerializeField] private int endLoopStringLength = 7;
 
-    [SerializeField] private string loopCodeString;
-    [SerializeField] private Transform targetLocation;
-    [SerializeField] private Transform loopLocation;
-    [SerializeField] private GameObject player;
-
-    public void GoInDoor()
+    private void Awake()
     {
-        if(!isLooping)
+        for (int i = 0; i < endLoopStringLength; ++i)
         {
-            player.transform.position = targetLocation.position;
+            endLoopString +=Random.Range(0, 2);
         }
-        else
-        {
-            player.transform.position = loopLocation.position;
-            
-            string loopString = "";
-            if (loopCode) loopString += '1';
-            else loopString += '0';
+    }
 
-            if (loopString == loopCodeString) isLooping = false;
+    public void ClickToGoToDoor(Transform targetDoor, char loopChar)
+    {
+        if(isLooping) GoToDoor(targetDoor, loopChar);
+    }
+
+    private void GoToDoor(Transform targetDoor, char loopChar)
+    {
+        playerPosistion.position = targetDoor.position;
+        
+        currentLoopString += loopChar;
+        
+        if (currentLoopString.Equals(endLoopString))
+        {
+            isLooping = false;
+            doorC.SetActive(true);
         }
+
+        if (currentLoopString.Length > endLoopStringLength) currentLoopString = null;
     }
 }

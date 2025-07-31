@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private void AssignInputs()
     {
         input.Main.Move.performed += ctx => ClickToMove();
-        input.Main.Interact.performed += ctx => Interact();
+        //input.Main.Interact.performed += ctx => Interact();
     }
     
     private void ClickToMove()
