@@ -13,6 +13,8 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemSO item)
     {
+        if(content.Count >= size)
+            return false;
         content.Add(item);
         OnInventoryChanged?.Invoke();
         return true;

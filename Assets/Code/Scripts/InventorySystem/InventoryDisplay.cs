@@ -10,6 +10,7 @@ public class InventoryDisplay : MonoBehaviour
     [SerializeField] private Transform slotParent;
     
     private List<InventorySlotUI> inventorySlots = new List<InventorySlotUI>();
+    
     private InventorySlotUI selectedSlot;
     
     private void Awake()
@@ -92,5 +93,16 @@ public class InventoryDisplay : MonoBehaviour
                 inventorySlots[i].UpdateSlot(null);
             }
         }
+    }
+
+    public InventorySlotUI GetSelectedSlot()
+    {
+        return selectedSlot;
+    }
+
+    public void SetSelectedSlot(InventorySlotUI slot)
+    {
+        if (selectedSlot == null) return;
+        selectedSlot = slot;
     }
 }

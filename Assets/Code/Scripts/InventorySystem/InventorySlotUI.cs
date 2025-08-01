@@ -45,4 +45,9 @@ public class InventorySlotUI : MonoBehaviour
     {
         selectedBorder.enabled = isSelected;
     }
+    
+    public ItemSO GetCurrentItem()
+    {
+        return currentItem;
+    }
 }

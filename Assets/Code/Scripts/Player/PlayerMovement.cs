@@ -15,11 +15,9 @@ public class PlayerMovement : MonoBehaviour
     private NavMeshAgent agent;
     Animator animator;
     
-    [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
 
     private float lookRotationSpeed = 8f;
-    private bool isMoving = true;
 
     private void Awake()
     {
@@ -32,27 +30,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void AssignInputs()
     {
-        input.Main.Move.performed += ctx => ClickToMove();
-        //input.Main.Interact.performed += ctx => Interact();
+        input.Main.Move.performed += ctx => RightClickToMove();
+        input.Main.Interact.performed += ctx => LeftClickToInteract();
     }
     
-    public void ClickToMove()
+    private void RightClickToMove()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName(INTERACT)) return;
+            if (hit.collider.GetComponent<InteractableObject>() != null)
+                return;
             
             agent.SetDestination(hit.point);
-            isMoving = true;
-            
-            if (clickEffect != null)
-            {
-                Instantiate(clickEffect, hit.point += new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
-            }
         }
     }
 
+    private void LeftClickToInteract()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
+        {
+            InteractableObject interactable = hit.collider.GetComponent<InteractableObject>();
+
+            if (interactable != null)
+            {
+                float distance = Vector3.Distance(transform.position, interactable.transform.position);
+                
+                if (distance <= interactable.GetInteractionRange())
+                {
+                    FaceTarget(interactable.transform.position);
+                    interactable.OnInteract();
+                    Interact();
+                }
+            }
+        }
+    }
+    
     private void OnEnable()
     {
         input.Enable();
@@ -66,28 +80,16 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         SetAnimations();
-
-        if (isMoving)
-        {
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (agent.velocity.sqrMagnitude == 0f)
-                {
-                    agent.ResetPath();
-                    isMoving = false;
-                }
-            }
-        }
         
-        if(agent.velocity.magnitude > 0.1f)
+        if(agent.velocity.sqrMagnitude > 0.1f)
         {
-            FaceTarget();
+            FaceTarget(agent.destination);;
         }
     }
     
-    private void FaceTarget()
+    private void FaceTarget(Vector3 destination)
     {
-        Vector3 direction = (agent.destination - transform.position).normalized;
+        Vector3 direction = (destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
     }
@@ -98,20 +100,19 @@ public class PlayerMovement : MonoBehaviour
         
         if(isInteracting) return;
         
-        if (!isMoving)
-        {
-            animator.Play(IDLE);
-        }
-        else
+        if (agent.hasPath && agent.remainingDistance > agent.stoppingDistance + 0.1f)
         {
             animator.Play(RUN);
         }
+        else
+        {
+            animator.Play(IDLE);
+        }
     }
 
-    public void Interact()
+    private void Interact()
     {
         agent.ResetPath();
-        isMoving = false;
         animator.SetTrigger(INTERACT);
     }
 }
