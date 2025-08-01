@@ -8,8 +8,9 @@ public class LoopDoor : MonoBehaviour
 {
     public bool isLooping = true;
     public string endLoopString = "";
-    
+
     [SerializeField] private string currentLoopString = "";
+    [SerializeField] private Transform targetDoor;
     [SerializeField] private GameObject doorC;
     [SerializeField] private Transform playerPosistion;
     [SerializeField] private int endLoopStringLength = 7;
@@ -22,12 +23,12 @@ public class LoopDoor : MonoBehaviour
         }
     }
 
-    public void ClickToGoToDoor(Transform targetDoor, char loopChar)
+    public void ClickToGoToDoor(string loopChar)
     {
-        if(isLooping) GoToDoor(targetDoor, loopChar);
+        if(isLooping) GoToDoor(loopChar);
     }
 
-    private void GoToDoor(Transform targetDoor, char loopChar)
+    private void GoToDoor(string loopChar)
     {
         playerPosistion.position = targetDoor.position;
         

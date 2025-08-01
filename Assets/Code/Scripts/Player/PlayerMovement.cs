@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask clickableLayers;
 
     private float lookRotationSpeed = 8f;
+    private bool isMoving = true;
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
         //input.Main.Interact.performed += ctx => Interact();
     }
     
-    private void ClickToMove()
+    public void ClickToMove()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
@@ -43,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
             if (animator.GetCurrentAnimatorStateInfo(0).IsName(INTERACT)) return;
             
             agent.SetDestination(hit.point);
+            isMoving = true;
+            
             if (clickEffect != null)
             {
                 Instantiate(clickEffect, hit.point += new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
@@ -62,11 +65,24 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        SetAnimations();
+
+        if (isMoving)
+        {
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (agent.velocity.sqrMagnitude == 0f)
+                {
+                    agent.ResetPath();
+                    isMoving = false;
+                }
+            }
+        }
+        
         if(agent.velocity.magnitude > 0.1f)
         {
             FaceTarget();
         }
-        SetAnimations();
     }
     
     private void FaceTarget()
@@ -82,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         
         if(isInteracting) return;
         
-        if (agent.velocity == Vector3.zero)
+        if (!isMoving)
         {
             animator.Play(IDLE);
         }
@@ -92,9 +108,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Interact()
+    public void Interact()
     {
         agent.ResetPath();
+        isMoving = false;
         animator.SetTrigger(INTERACT);
     }
 }
