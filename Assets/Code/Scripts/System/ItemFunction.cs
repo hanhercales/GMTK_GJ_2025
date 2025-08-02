@@ -37,11 +37,12 @@ public class ItemFunction : MonoBehaviour
         
         if(inventoryDisplay.GetSelectedSlot().GetCurrentItem().itemID == itemToUse.itemID)
         {
-            inventory.RemoveItem(inventoryDisplay.GetSelectedSlot().GetCurrentItem());
-            inventoryDisplay.SetSelectedSlot(null);
-            
             if(destroyAfterUse)
+            {
+                inventory.RemoveItem(inventoryDisplay.GetSelectedSlot().GetCurrentItem());
                 Destroy(GetComponent<InteractableObject>());
+            }
+            inventoryDisplay.SetSelectedSlot(null);
             
             return true;
         }

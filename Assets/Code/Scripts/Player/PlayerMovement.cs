@@ -13,9 +13,11 @@ public class PlayerMovement : MonoBehaviour
 
     private CustomActions input;
     private NavMeshAgent agent;
-    Animator animator;
+    private Animator animator;
     
-    [SerializeField] LayerMask clickableLayers;
+    [SerializeField] private LayerMask clickableLayers;
+    [SerializeField] private AudioClip interactSFX;
+    [SerializeField] private AudioManager audioManager;
 
     private float lookRotationSpeed = 8f;
 
@@ -114,5 +116,10 @@ public class PlayerMovement : MonoBehaviour
     {
         agent.ResetPath();
         animator.SetTrigger(INTERACT);
+        
+        if (AudioManager.Instance != null && interactSFX != null)
+        {
+            AudioManager.Instance.PlaySFX(interactSFX);
+        }
     }
 }
