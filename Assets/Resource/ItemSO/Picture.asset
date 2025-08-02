@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: Pic000
   itemName: Code Picture
-  itemSprite: {fileID: 21300000, guid: 3950c5fffc16edb419514f770750bf2f, type: 3}
+  itemSprite: {fileID: -2042794978, guid: 3950c5fffc16edb419514f770750bf2f, type: 3}
