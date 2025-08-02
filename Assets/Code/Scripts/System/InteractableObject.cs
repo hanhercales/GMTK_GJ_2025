@@ -18,21 +18,21 @@ public class InteractableObject : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (particleEffect != null)
-            particleEffect.gameObject.SetActive(true);
-        else return;
+        if (particleEffect == null) return;
+        particleEffect.gameObject.SetActive(true);
     }
-    
+
     private void OnMouseExit()
     {
-        if(particleEffect != null)
-            particleEffect.gameObject.SetActive(false);
-        else return;
+        if (particleEffect == null) return;
+        particleEffect.gameObject.SetActive(false);
     }
 
     public void OnInteract()
     {
         onInteraction.Invoke();
+        if (particleEffect == null) return;
+        particleEffect.gameObject.SetActive(false);
     }
     
     private void OnDrawGizmosSelected()
