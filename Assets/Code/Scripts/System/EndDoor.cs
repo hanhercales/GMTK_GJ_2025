@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public class EndDoor : MonoBehaviour
@@ -34,6 +35,13 @@ public class EndDoor : MonoBehaviour
     
     public void ChangeScene(int sceneIndex)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
+        PlayerPrefs.SetInt("CurrentScene", SceneManager.GetActiveScene().buildIndex);
+        StartCoroutine(Delay(sceneIndex, 1f));
+    }
+
+    private IEnumerator Delay(int sceneIndex, float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        SceneManager.LoadScene(sceneIndex);
     }
 }
