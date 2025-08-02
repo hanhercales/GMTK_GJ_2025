@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySlotUI : MonoBehaviour
 {
-    public event System.Action<InventorySlotUI> OnSlotClickedEvent;
-    
     [SerializeField] private Image icon;
     [SerializeField] private Image selectedBorder;
+    [SerializeField] private TextMeshProUGUI nameText;
     
     private ItemSO currentItem;
     private bool isSelected = false;
@@ -17,22 +17,20 @@ public class InventorySlotUI : MonoBehaviour
     {
         if(item != null)
         {
+            nameText.text = item.itemName;
             currentItem = item;
             icon.sprite = item.itemSprite;
             icon.enabled = true;
         }
         else
         {
+            nameText.text = "";
             icon.sprite = null;
             icon.enabled = false;
         }
         
         selectedBorder.enabled = false;
-    }
-
-    public void OnSlotClicked()
-    {
-        OnSlotClickedEvent?.Invoke(this);
+        nameText.enabled = false;
     }
     
     public void SetSelected(bool isSelected)
@@ -44,6 +42,7 @@ public class InventorySlotUI : MonoBehaviour
     private void UpdateSelectionUI()
     {
         selectedBorder.enabled = isSelected;
+        nameText.enabled = isSelected;
     }
     
     public ItemSO GetCurrentItem()

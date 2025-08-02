@@ -7,39 +7,28 @@ using Random = UnityEngine.Random;
 public class LoopDoor : MonoBehaviour
 {
     public bool isLooping = true;
-    public string endLoopString = "";
 
-    [SerializeField] private string currentLoopString = "";
     [SerializeField] private Transform targetDoor;
-    [SerializeField] private GameObject doorC;
     [SerializeField] private Transform playerPosistion;
-    [SerializeField] private int endLoopStringLength = 7;
-
-    private void Awake()
-    {
-        for (int i = 0; i < endLoopStringLength; ++i)
-        {
-            endLoopString +=Random.Range(0, 2);
-        }
-    }
+    [SerializeField] private EndDoor endDoor;
+    [SerializeField] private InteractableObject thisInteractableObject;
 
     public void ClickToGoToDoor(string loopChar)
     {
         if(isLooping) GoToDoor(loopChar);
+        else thisInteractableObject.gameObject.SetActive(false);
     }
 
     private void GoToDoor(string loopChar)
     {
-        playerPosistion.position = targetDoor.position;
+        StartCoroutine(TeleportDelay(1f));
         
-        currentLoopString += loopChar;
-        
-        if (currentLoopString.Equals(endLoopString))
-        {
-            isLooping = false;
-            doorC.SetActive(true);
-        }
+        endDoor.currentLoopString += loopChar;
+    }
 
-        if (currentLoopString.Length > endLoopStringLength) currentLoopString = null;
+    private IEnumerator TeleportDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        playerPosistion.position = targetDoor.position;
     }
 }
