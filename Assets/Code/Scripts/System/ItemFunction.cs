@@ -40,9 +40,9 @@ public class ItemFunction : MonoBehaviour
             if(destroyAfterUse)
             {
                 inventory.RemoveItem(inventoryDisplay.GetSelectedSlot().GetCurrentItem());
+                inventoryDisplay.SetSelectedSlot(null);
                 Destroy(GetComponent<InteractableObject>());
             }
-            inventoryDisplay.SetSelectedSlot(null);
             
             return true;
         }
