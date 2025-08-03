@@ -22,8 +22,10 @@ public class LoopDoor : MonoBehaviour
     private void GoToDoor(string loopChar)
     {
         StartCoroutine(TeleportDelay(1f));
-        
-        endDoor.currentLoopString += loopChar;
+        if (!string.IsNullOrEmpty(loopChar))
+        {
+            endDoor.currentLoopQueue.Enqueue(loopChar[0]);
+        }
     }
 
     private IEnumerator TeleportDelay(float delayTime)
