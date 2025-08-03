@@ -23,15 +23,14 @@ public class ItemFunction : MonoBehaviour
         if(inventory.AddItem(itemToTake) && destroyAfterUse)
             Destroy(GetComponent<InteractableObject>());
     }
-
+    
     private bool UseItem()
     {
         if(inventoryDisplay.GetSelectedSlot() == null ||
            inventoryDisplay.GetSelectedSlot().GetCurrentItem().itemID != itemToUse.itemID)
         {
-            notificationText.text = "Need " + itemToUse.itemName + "! Please select it from your inventory.";
-            notificationText.enabled = true;
-            StartCoroutine(TextDisappear(2f));
+            Debug.Log(inventoryDisplay.GetSelectedSlot().GetCurrentItem().itemID + " " + itemToUse.itemID);
+            SetNoti("Need " + itemToUse.itemName + "! Please select it from your inventory.");
             return false;
         }
         
@@ -41,7 +40,8 @@ public class ItemFunction : MonoBehaviour
             {
                 inventory.RemoveItem(inventoryDisplay.GetSelectedSlot().GetCurrentItem());
                 inventoryDisplay.SetSelectedSlot(null);
-                Destroy(GetComponent<InteractableObject>());
+                if(GetComponent<InteractableObject>() != null)
+                    Destroy(GetComponent<InteractableObject>());
             }
             
             return true;
@@ -66,5 +66,12 @@ public class ItemFunction : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         notificationText.enabled = false;
+    }
+
+    public void SetNoti(string noti)
+    {
+        notificationText.text = noti;
+        notificationText.enabled = true;
+        StartCoroutine(TextDisappear(2f));
     }
 }
