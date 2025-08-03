@@ -217,7 +217,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  interactionRange: 7
+  interactionRange: 8
   particleEffect: {fileID: 7805571250464848889}
 --- !u!114 &7844165278755586102
 MonoBehaviour:
