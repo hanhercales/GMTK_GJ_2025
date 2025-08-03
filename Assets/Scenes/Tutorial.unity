@@ -4187,6 +4187,10 @@ PrefabInstance:
       propertyPath: interactionRange
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4740270714262952806, guid: cff74b725d5cecc4483334606f4132e6, type: 3}
+      propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5268012272800592292, guid: cff74b725d5cecc4483334606f4132e6, type: 3}
       propertyPath: endLoopText
       value: 
