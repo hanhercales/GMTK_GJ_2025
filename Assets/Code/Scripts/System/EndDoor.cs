@@ -11,6 +11,8 @@ public class EndDoor : MonoBehaviour
     public string endLoopString = "";
     public int endLoopStringLength = 0;
     public Queue<char> currentLoopQueue = new Queue<char>();
+    
+    [SerializeField] private string currentLoopString = "";
     [SerializeField] private InteractableObject thisInteractableObject;
     [SerializeField] private TextMeshProUGUI endLoopText;
 
@@ -25,15 +27,21 @@ public class EndDoor : MonoBehaviour
 
     private void Update()
     {
-        if (currentLoopQueue.Count > endLoopStringLength)
-        {
-            currentLoopQueue.Clear();
-        }
-
         if (new string(currentLoopQueue.ToArray()) == endLoopString)
         {
             thisInteractableObject.gameObject.SetActive(true);
         }
+    }
+
+    public void CheckLoopString(string loopChar)
+    {
+        if (currentLoopString.Length == endLoopStringLength)
+        {
+            currentLoopQueue.Dequeue();
+        }
+        
+        currentLoopQueue.Enqueue(loopChar[0]);
+        currentLoopString = new string(currentLoopQueue.ToArray());
     }
     
     public void ChangeScene(int sceneIndex)

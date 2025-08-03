@@ -24,7 +24,7 @@ public class LoopDoor : MonoBehaviour
         StartCoroutine(TeleportDelay(1f));
         if (!string.IsNullOrEmpty(loopChar))
         {
-            endDoor.currentLoopQueue.Enqueue(loopChar[0]);
+            endDoor.CheckLoopString(loopChar);
         }
     }
 
