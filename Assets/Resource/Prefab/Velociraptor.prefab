@@ -132,10 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee34fbc53cc06154f8cfdf6419f23279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickEffect: {fileID: 0}
   clickableLayers:
     serializedVersion: 2
     m_Bits: 1
+  interactSFX: {fileID: 8300000, guid: 32511b4c07f402b4595ed47c0d10ac45, type: 3}
+  audioManager: {fileID: 0}
 --- !u!65 &7808843090835575692
 BoxCollider:
   m_ObjectHideFlags: 0
