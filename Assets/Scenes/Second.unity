@@ -7915,7 +7915,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 10de4a2c6d64f5b45a16173d326bc2cf, type: 3}
   m_PrefabInstance: {fileID: 2147479205}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5006759411013683584
+--- !u!1001 &3430226363195921819
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -7925,7 +7925,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.4
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7933,23 +7933,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -39.45
+      value: -21
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634498588266422290, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7977,7 +7977,7 @@ PrefabInstance:
       objectReference: {fileID: 248832805}
     - target: {fileID: 7638285851280012019, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_VersionIndex
-      value: 2482
+      value: 2497
       objectReference: {fileID: 0}
     - target: {fileID: 8545048656057401936, guid: 86fc8bc59829e114d946131ffebb6966, type: 3}
       propertyPath: m_Mesh
@@ -7998,4 +7998,4 @@ SceneRoots:
   - {fileID: 810632822}
   - {fileID: 123207183}
   - {fileID: 1795342107}
-  - {fileID: 5006759411013683584}
+  - {fileID: 3430226363195921819}
