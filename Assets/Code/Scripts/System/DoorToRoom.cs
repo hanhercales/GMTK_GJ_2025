@@ -11,7 +11,9 @@ public class DoorToRoom : MonoBehaviour
 
     private void GoToRoom()
     {
+        playerPosistion.gameObject.SetActive(false);
         playerPosistion.position = targetRoom.position;
+        playerPosistion.gameObject.SetActive(true);
         cameraPosistion.position = targetCameraPositon.position;
     }
 

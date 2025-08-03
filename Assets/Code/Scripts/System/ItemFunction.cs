@@ -29,6 +29,7 @@ public class ItemFunction : MonoBehaviour
         if(inventoryDisplay.GetSelectedSlot() == null ||
            inventoryDisplay.GetSelectedSlot().GetCurrentItem().itemID != itemToUse.itemID)
         {
+            Debug.Log(inventoryDisplay.GetSelectedSlot().GetCurrentItem().itemID + " " + itemToUse.itemID);
             SetNoti("Need " + itemToUse.itemName + "! Please select it from your inventory.");
             return false;
         }
